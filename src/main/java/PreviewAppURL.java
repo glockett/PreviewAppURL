@@ -4,14 +4,13 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 import java.util.Scanner;
 
-
 public class PreviewAppURL {
 
-    private final String USERNAME = "gwyn.lockett@gmail.com";
-    private final String PWD = "password";
+    private static String USERNAME = "gwyn.lockett@guardian.co.uk";
+    private static String PWD = "password";
     private static String PREVIEW_URL;
     private static final String ENVIRONMENT_URL = "http://viewer.code.dev-gutools.co.uk/preview/";
-    private static final String MAPI_URL = "x-gu://preview.mobile-apps.guardianapis.com/items";
+    private static final String MAPI_URL = "http://x-gu://preview.mobile-apps.guardianapis.com/items/";
     private static final String SENDER = "gumobtest@gmail.com";
     private static final String HOST = "localhost";
 
@@ -29,11 +28,11 @@ public class PreviewAppURL {
 
     public static void getAppPreviewURL() {
 
-        Scanner user_input = new Scanner(System.in);
+//        Scanner user_input = new Scanner(System.in);
+//        System.out.print("Please enter the Composer Preview URL:\n");
+//        String composerPreview_URL = user_input.next();
 
-        System.out.print("Please enter the Composer Preview URL:\n");
-
-        String composerPreview_URL = user_input.next();
+        String composerPreview_URL = "http://viewer.code.dev-gutools.co.uk/preview/global/2015/nov/17/tech-briefing";
 
         //Create the PREVIEW_URL
         String s = composerPreview_URL.replace(ENVIRONMENT_URL, "");
@@ -52,15 +51,15 @@ public class PreviewAppURL {
         String host = HOST;
 
         Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.ssl.enable", true);
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
 
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(USERNAME, PWD);
+                        return new PasswordAuthentication(USERNAME, "jmnezyrfbzftkqod");
                     }
                 });
 
