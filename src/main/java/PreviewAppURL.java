@@ -6,7 +6,7 @@ public class PreviewAppURL {
     private static String ComposerPreview_URL;
     private static String PreviewApp_URL;
     private static final String Environment_URL = "http://viewer.code.dev-gutools.co.uk/preview/";
-    private static final String MAPI_URL = "x-gu://preview.mobile-apps.guardianapis.com/items/";
+    private static final String MAPI_URL = "x-gu://preview.mobile-apps.guardianapis.com/items";
 
 
     public static void main(String[] args) {
