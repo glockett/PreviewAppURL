@@ -1,11 +1,10 @@
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 import java.util.Scanner;
+
+import javax.swing.*;
 
 public class PreviewAppURL {
 
@@ -13,13 +12,24 @@ public class PreviewAppURL {
     private static String PWD = "jmnezyrfbzftkqod";
     private static String PREVIEW_URL;
     private static final String ENVIRONMENT_URL = "http://viewer.code.dev-gutools.co.uk/preview/";
-    private static final String MAPI_URL = "http://x-gu://preview.mobile-apps.guardianapis.com/items/";
+    private static final String MAPI_URL = "//x-gu://preview.mobile-apps.guardianapis.com/items/";
     private static final String SENDER = "gumobtest@gmail.com";
     private static final String HOST = "localhost";
 
-    public static void main(String[] args) {
+     public static void main(String[] args) {
 
-        getAppPreviewURL();
+
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                JFrame gui = new MainFrame ("Mobile Apps Team - Preview");
+                gui.setSize(500, 400);
+                gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                gui.setVisible(true);
+            }
+        });
+
+
+        //getAppPreviewURL();
 
         Scanner user_input = new Scanner(System.in);
 
@@ -29,13 +39,13 @@ public class PreviewAppURL {
         sendEmail(emailAddress);
     }
 
-    public static void getAppPreviewURL() {
+    public static void getAppPreviewURL(String composerPreview_URL) {
 
 //        Scanner user_input = new Scanner(System.in);
 //        System.out.print("Please enter the Composer Preview URL:\n");
 //        String composerPreview_URL = user_input.next();
 
-        String composerPreview_URL = "http://viewer.code.dev-gutools.co.uk/preview/global/2015/nov/17/tech-briefing";
+        composerPreview_URL = "http://viewer.code.dev-gutools.co.uk/preview/global/2015/nov/17/tech-briefing";
 
         //Create the PREVIEW_URL
         String s = composerPreview_URL.replace(ENVIRONMENT_URL, "");
@@ -73,11 +83,8 @@ public class PreviewAppURL {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(emailAddress));
             message.setSubject("Mobile App - Preview Link");
-//            message.setContent(message, "text/html");
-//            message.setText("Open the link in the app: \n" + PREVIEW_URL);
-
             message.setContent("Please click the link to launch in the app: " +
-                            "<a href=//"+ PREVIEW_URL + ">" + PREVIEW_URL + "</a>", "text/html");
+                    "<a href=" + PREVIEW_URL + ">" + PREVIEW_URL + "</a>", "text/html");
 
             Transport.send(message);
 
