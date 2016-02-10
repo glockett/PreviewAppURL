@@ -13,7 +13,7 @@ public class PreviewAppURL {
     private static String PWD = "jmnezyrfbzftkqod";
     private static String PREVIEW_URL;
     private static final String ENVIRONMENT_URL = "http://viewer.code.dev-gutools.co.uk/preview/";
-    private static final String MAPI_URL = "http://x-gu://preview.mobile-apps.guardianapis.com/items/";
+    private static final String MAPI_URL = "http:x-gu://preview.mobile-apps.guardianapis.com/items/";
     private static final String SENDER = "gumobtest@gmail.com";
     private static final String HOST = "localhost";
 
