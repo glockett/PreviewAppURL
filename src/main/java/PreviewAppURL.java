@@ -9,20 +9,17 @@ public class PreviewAppURL {
     private static String USERNAME = "gwyn.lockett@guardian.co.uk";
     private static String PWD = "vtzqpptoodgwpoks";
     private static String PREVIEW_URL;
-    private static final String ENVIRONMENT_URL = "http://viewer.code.dev-gutools.co.uk/preview/";
-    private static final String MAPI_URL = "http://x-gu://preview.mobile-apps.guardianapis.com/items/";
+    private static final String ENVIRONMENT_URL = "http://viewer.gutools.co.uk/preview/";
+    private static final String MAPI_URL = "x-gu://preview.mobile-apps.guardianapis.com/items/";
     private static final String SENDER = "gumobtest@gmail.com";
-    private static final String HOST = "localhost";
 
     public static void main(String[] args) {
 
         getPreviewURL();
-
-        String emailAddress = JOptionPane.showInputDialog("Please enter the email Address you wish to send the link too: ");
+        String emailAddress = JOptionPane.showInputDialog("Please enter the email Address you wish to send the link " +
+                "too");
 
         sendEmail(emailAddress);
-
-
 
     }
 
@@ -30,12 +27,13 @@ public class PreviewAppURL {
 
         String composerPreview_URL = JOptionPane.showInputDialog("Please enter the ComposerURL:");
 
+        //TEST
         //composerPreview_URL = "http://viewer.code.dev-gutools.co.uk/preview/global/2015/nov/17/tech-briefing";
 
         //Create the PREVIEW_URL
         String s = composerPreview_URL.replace(ENVIRONMENT_URL, "");
 
-        System.out.println(s);
+        //System.out.println(s);
 
         PREVIEW_URL = MAPI_URL + s;
 
@@ -46,9 +44,7 @@ public class PreviewAppURL {
 
     public static void sendEmail(String emailAddress) {
 
-        //String to = emailAddress;
         String from = SENDER;
-        //String host = HOST;
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -70,8 +66,6 @@ public class PreviewAppURL {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(emailAddress));
             message.setSubject("Mobile App - Preview Link");
-//            message.setContent(message, "text/html");
-//            message.setText("Open the link in the app: \n" + PREVIEW_URL);
 
             message.setContent("<p>Please click the link to launch in the app and follow the on-board authentication " +
                     "prompts.</p><p>(Note: You must be signed in with a Guardian Email address)</p> " +
