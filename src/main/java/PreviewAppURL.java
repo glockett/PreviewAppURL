@@ -1,16 +1,13 @@
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import javax.swing.*;
 import java.util.Properties;
-import java.util.Scanner;
 
 public class PreviewAppURL {
 
     private static String USERNAME = "gwyn.lockett@guardian.co.uk";
-    private static String PWD = "jmnezyrfbzftkqod";
+    private static String PWD = "vtzqpptoodgwpoks";
     private static String PREVIEW_URL;
     private static final String ENVIRONMENT_URL = "http://viewer.code.dev-gutools.co.uk/preview/";
     private static final String MAPI_URL = "http://x-gu://preview.mobile-apps.guardianapis.com/items/";
@@ -19,23 +16,21 @@ public class PreviewAppURL {
 
     public static void main(String[] args) {
 
-        getAppPreviewURL();
+        getPreviewURL();
 
-        Scanner user_input = new Scanner(System.in);
-
-        System.out.print("Please enter the email Address you wish to send the link too:\n");
-        String emailAddress = user_input.next();
+        String emailAddress = JOptionPane.showInputDialog("Please enter the email Address you wish to send the link too: ");
 
         sendEmail(emailAddress);
+
+
+
     }
 
-    public static void getAppPreviewURL() {
+    public static String getPreviewURL() {
 
-//        Scanner user_input = new Scanner(System.in);
-//        System.out.print("Please enter the Composer Preview URL:\n");
-//        String composerPreview_URL = user_input.next();
+        String composerPreview_URL = JOptionPane.showInputDialog("Please enter the ComposerURL:");
 
-        String composerPreview_URL = "http://viewer.code.dev-gutools.co.uk/preview/global/2015/nov/17/tech-briefing";
+        //composerPreview_URL = "http://viewer.code.dev-gutools.co.uk/preview/global/2015/nov/17/tech-briefing";
 
         //Create the PREVIEW_URL
         String s = composerPreview_URL.replace(ENVIRONMENT_URL, "");
@@ -44,7 +39,9 @@ public class PreviewAppURL {
 
         PREVIEW_URL = MAPI_URL + s;
 
-        System.out.println(PREVIEW_URL);
+        //System.out.println(PREVIEW_URL);
+
+        return PREVIEW_URL;
     }
 
     public static void sendEmail(String emailAddress) {
@@ -76,12 +73,14 @@ public class PreviewAppURL {
 //            message.setContent(message, "text/html");
 //            message.setText("Open the link in the app: \n" + PREVIEW_URL);
 
-            message.setContent("Please click the link to launch in the app: " +
+            message.setContent("<p>Please click the link to launch in the app and follow the on-board authentication " +
+                    "prompts.</p><p>(Note: You must be signed in with a Guardian Email address)</p> " +
                             "<a href=//"+ PREVIEW_URL + ">" + PREVIEW_URL + "</a>", "text/html");
 
             Transport.send(message);
 
-            System.out.println("message sent successfully....");
+            JOptionPane.showMessageDialog(null, "The preview Link has been sent", "PREVIEW LINK SENT", JOptionPane.PLAIN_MESSAGE);
+
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
